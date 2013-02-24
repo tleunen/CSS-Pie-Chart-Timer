@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>CSS pie chart timer</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+        <link rel='stylesheet' type="text/css" href='pie_chart_timer.css'></link>
+        <style type="text/css">
+            #wrapper3 .timer {
+                font-size: 400px;
+            }
+
+            #wrapper3 .track,
+            #wrapper3 .pie .slice {
+                border: 0.05em solid black;
+                width: 0.9em;
+                height: 0.9em;
+            }
+
+            #wrapper3 .pie .slice {
+                background: #EB8540;
+                border-color: #B06A3B;
+            }
+        </style>
+
+        <script type="text/javascript">
+            var getColorForPercentage = function(percentColors, pct) {
+                for (var i = 0; i < percentColors.length; i++) {
+                    if (pct <= percentColors[i].pct) {
+                        var lower = percentColors[i - 1] || percentColors[0];
+                        var upper = percentColors[i];
+                        var range = upper.pct - lower.pct;
+                        var rangePct = (pct - lower.pct) / range;
+                        var pctLower = 1 - rangePct;
+                        var pctUpper = rangePct;
+                        var color = {
+                            r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+                            g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
+                            b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
+                        };
+                        return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
+                        // or output as hex if preferred
+                    }
+                }
+            }
+
+            $(function(){
+                var countdownColors = [
+                    { pct: 0.0, color: { r: 0x00, g: 0xff, b: 0 } },
+                    { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
+                    { pct: 1.0, color: { r: 0xff, g: 0x00, b: 0 } }
+                ];
+
+                $.each($('.timer'), function() {
+                    var timer = $(this),
+                        pie = timer.find('.pie'),
+                        slices = pie.find('.slice'),
+                        spinner = pie.find('.spinner'),
+                        timerValue = 0;
+
+                    setInterval(function() {
+                        spinner.css({
+                            'webkitTransform': 'rotate('+timerValue+'deg)',
+                            'oTransform': 'rotate('+timerValue+'deg)',
+                            'mozTransform': 'rotate('+timerValue+'deg)',
+                            'msTransform': 'rotate('+timerValue+'deg)',
+                            'transform': 'rotate('+timerValue+'deg)'
+                        });
+
+                        if(timer.hasClass('countdown')) {
+                            var color = getColorForPercentage(countdownColors, timerValue/360);
+                            slices.css({
+                                'borderColor': color,
+                                'background': color
+                            });
+
+                            if(timerValue > 180) {
+                                pie.removeClass('full');
+                            }
+                            else {
+                                pie.addClass('full');
+                            }
+                        }
+                        else {
+                            if(timerValue > 180) {
+                                pie.addClass('full');
+                            }
+                            else {
+                                pie.removeClass('full');
+                            }
+                        }
+
+                        if(++timerValue > 360) {
+                            timerValue = 0;
+                        }
+                    }, 17);
+                });
+
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <div id='wrapper1'>
+            <div class='timer'>
+                <div class='track'></div>
+                <div class='pie'>
+                    <div class='spinner slice'></div>
+                    <div class='filler slice'></div>
+                </div>
+            </div>
+        </div>
+
+        <div id='wrapper2'>
+            <div class='timer countdown'>
+                <div class='track'></div>
+                <div class='pie'>
+                    <div class='spinner slice'></div>
+                    <div class='filler slice'></div>
+                </div>
+            </div>
+        </div>
+
+        <div id='wrapper3'>
+            <div class='timer'>
+                <div class='track'></div>
+                <div class='pie'>
+                    <div class='spinner slice'></div>
+                    <div class='filler slice'></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

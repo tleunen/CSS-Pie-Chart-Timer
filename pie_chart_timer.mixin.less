@@ -1,0 +1,61 @@
+.pie-chart-timer(@timer-size, @timer-border-size, @timer-border-color: #c0c0c0, @timer-track-color: transparent, @timer-pie-color: transparent) {
+
+    .timer {
+        position: relative;
+        width: @timer-size;
+        height: @timer-size;
+    }
+
+    .pie {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        clip: rect(0px,@timer-size,@timer-size,@timer-size/2); /* only show the right half of the pie */
+    }
+
+    .countdown .pie {
+        clip: rect(0px,@timer-size/2,@timer-size,0px); /* only show the left half of the pie */
+    }
+
+    .pie.full {
+        /* show the entire pie */
+        clip: rect(auto,auto,auto,auto);
+    }
+
+    .track,
+    .pie .slice {
+        border: @timer-border-size solid @timer-track-color;
+        position: absolute;
+        width: @timer-size - (2* @timer-border-size);
+        height: @timer-size - (2* @timer-border-size);
+        -moz-border-radius: @timer-size/2;
+        -o-border-radius: @timer-size/2;
+        -webkit-border-radius: @timer-size/2;
+        -ms-border-radius: @timer-size/2;
+        border-radius: @timer-size/2;
+    }
+
+    .pie .slice {
+        background: @timer-pie-color;
+        border-color: @timer-border-color;
+        clip: rect(0px,@timer-size/2,@timer-size,0px); /* only take a half of the pie (left part) */
+    }
+
+    .countdown .pie .slice {
+        border-color: @timer-border-color;
+        clip: rect(0px,@timer-size,@timer-size,@timer-size/2); /* only take a half of the pie (right part) */
+    }
+
+    .pie .filler {
+        -webkit-transform:rotate(180deg);
+        -o-transform:rotate(180deg);
+        -ms-transform:rotate(180deg);
+        -moz-transform:rotate(180deg);
+        transform:rotate(180deg);
+        display: none;
+    }
+
+    .pie.full .filler {
+        display: block;
+    }
+}
