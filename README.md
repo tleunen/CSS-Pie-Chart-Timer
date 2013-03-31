@@ -53,18 +53,18 @@ There is two version available in the repo:
 
 To customize the way the timer/countdown renders, you need to include `pie_chart_timer.css`. After that, you can customize the timer by changing some css classes:
 ```css
-#wrapper1 .timer {
+#wrapper1 .pctTimer {
     font-size: 150px; /* The size (width and height) of the timer */
 }
 
-#wrapper1 .track,
-#wrapper1 .pie .slice {
+#wrapper1 .pctTrack,
+#wrapper1 .pctPie .pctSlice {
     border: 0.05em solid #eee; /* size of the border (and track) and the color of the track */
     width: 0.9em;  /* 1em - (2*border-width) */
     height: 0.9em;  /* 1em - (2*border-width) */
 }
 
-#wrapper1 .pie .slice {
+#wrapper1 .pctPie .pctSlice {
     background: transparent; /* fill-color of the timer */
     border-color: #c0c0c0; /* border color of the timer */
 }
