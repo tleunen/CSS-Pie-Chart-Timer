@@ -16,28 +16,30 @@ You need to use a specific html hierarchy with css classes to make it work.
 * As a timer:
 
 ```html
-    <div class='timer'>
-        <div class='track'></div>
-        <div class='pie'>
-            <div class='spinner slice'></div>
-            <div class='filler slice'></div>
+    <div id='wrapper1'>
+        <div class='pctTimer'>
+            <div class='pctTrack'></div>
+            <div class='pctPie'>
+                <div class='pctSpinner pctSlice'></div>
+                <div class='pctFiller pctSlice'></div>
+            </div>
         </div>
     </div>
 ```
 * As a countdown:
 
 ```html
-    <div class='timer countdown'>
-        <div class='track'></div>
-        <div class='pie'>
-            <div class='spinner slice'></div>
-            <div class='filler slice'></div>
+    <div class='pctTimer pctCountdown'>
+        <div class='pctTrack'></div>
+        <div class='pctPie'>
+            <div class='pctSpinner pctSlice'></div>
+            <div class='pctFiller pctSlice'></div>
         </div>
     </div>
 ```
 
-As you can see, the only difference between the 2 codes is the `countdown` class.
-The `<div class='track'></div>` block is also optional.
+As you can see, the only difference between the 2 codes is the `pctCountdown` class.
+The `<div class='pctTrack'></div>` block is also optional.
 
 ## CSS or LESS
 
@@ -70,7 +72,7 @@ To customize the way the timer/countdown renders, you need to include `pie_chart
 
 ### LESS
 
-LESS is definitely the easiest way to use this small script. You only need to include `pie_chart_timer.mixin.less` and use our mixin in your code and everything will work fine. Here is an example:
+LESS is definitely the easiest way to use this small script. You only need to include `pie_chart_timer.mixin.less`. This will include basic css and provide you a mixin to easily set the size and style of your timer. Here is an example:
 
 ```css
 #wrapper1 {

@@ -1,28 +1,28 @@
-.timer {
+.pctTimer {
     position: relative;
     font-size: 150px; /* width and height of the timer, so everything depends on this value, as we use 'em' in children */
     width: 1em;
     height: 1em;
 }
 
-.pie {
+.pctPie {
     position: absolute;
     width: 1em;
     height: 1em;
     clip: rect(0em,1em,1em,0.5em); /* only show the right half of the pie */
 }
 
-.countdown .pie {
+.pctCountdown .pctPie {
     clip: rect(0em,0.5em,1em,0em); /* only show the left half of the pie */
 }
 
-.pie.full {
+.pctPie.pctFull {
     /* show the entire pie */
     clip: rect(auto,auto,auto,auto);
 }
 
-.track,
-.pie .slice {
+.pctTrack,
+.pctPie .pctSlice {
     border: 0.05em solid #eee;
     position: absolute;
     width: 0.9em;  /* 1em - (2*border-width) */
@@ -34,17 +34,17 @@
     border-radius: 0.5em;
 }
 
-.pie .slice {
+.pctPie .pctSlice {
     background: transparent;
     border-color: #c0c0c0;
     clip: rect(0em,0.5em,1em,0em); /* only take a half of the pie (left part) */
 }
 
-.countdown .pie .slice {
+.pctCountdown .pctPie .pctSlice {
     clip: rect(0em,1em,1em,0.5em); /* only take a half of the pie (right part) */
 }
 
-.pie .filler {
+.pctPie .pctFiller {
     -webkit-transform:rotate(180deg);
     -o-transform:rotate(180deg);
     -ms-transform:rotate(180deg);
@@ -53,6 +53,6 @@
     display: none;
 }
 
-.pie.full .filler {
+.pctPie.pctFull .pctFiller {
     display: block;
 }
